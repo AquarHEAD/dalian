@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<head>
+<style type="text/css">
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+	margin: 20px;
+	font-family: monospace, sans-serif;
+	width: 960px;
+}
+
+.admin-title {
+	text-align: center;
+	clear: both;
+}
+
+.content {
+	margin-top: 10px;
+}
+
+.admin-tools{
+	float: left;
+	margin-left: 20px;
+	width: 650px;
+}
+
+.toolset-wrapper{
+	margin-bottom: 20px;
+}
+
+.toolset-title{
+	font-size: 18px;
+	margin: 0px;
+}
+
+.tool-wrapper{
+	margin-bottom: 10px;
+}
+
+.tool-title{
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+
+.toolset-title a:link, .toolset-title a:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.toolset-title a:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
+.tool-form{
+	font-size: 13px;
+	margin-left: 9px;
+}
+
+.form-line{
+	margin-bottom: 2px;
+}
+
+.form-label{
+	display: inline-block;
+	margin-right: 10px;
+	width: 150px;
+}
+
+.form-input{
+	margin: 0px;
+	display: inline-block;
+}
+
+.activities{
+	margin: 0px;
+	width: 270px;
+	float: right;
+}
+
+.admin-title a:link, .admin-title a:visited{
+	color: black;
+	text-decoration: none;
+}
+
+.admin-title a:hover{
+	background-color: #12ff8b;
+	text-decoration: none;
+}
+
+.delete-bookmark:link, .delete-bookmark:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.delete-bookmark:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
+.category-title{
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+ul.bookmark-wrapper {
+    margin: 0px;
+    padding-left: 0px;
+}
+
+.bookmark-wrapper li{
+    margin-top: 8px;
+    margin-left: 5px;
+    width: 200px;
+    display: inline-block;
+	list-style-type: none;
+}
+
+.bookmark:link, .bookmark:visited{
+	color: #f0bdff;
+	text-decoration: none;
+}
+
+.bookmark:hover{
+	background-color: #42ffe0;
+	text-decoration: none;
+}
+
+</style>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+    <div class="admin-title">
+        <p><a href="/">「ダンタリアンの書架」</a>の管理者</p>
+        <hr />
+    </div>
+    
+    
+    <div class="content">
+    
+        <div class="admin-tools">
+            
+            <div class="toolset-wrapper">
+                <div class="toolset-title">Bookmarks</div>
+                <hr />
+                
+                {% for category in categories %}
+                {% if category.bookmarks %}
+                <div class="category-wrapper">
+                    <div class="category-title">{{ category.name }}</div>
+                    <hr />
+                    <ul class="bookmark-wrapper">
+                        {% for bookmark in category.bookmarks %}
+                        <li><a class="bookmark" href="/bookmarks/edit-bookmark/{{ bookmark.id }}">{{ bookmark.name }}({{ bookmark.visited }})</a><a class="delete-bookmark" href="/bookmarks/delete-bookmark/{{ bookmark.id }}" title="delete">x</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% endfor %}
+                                                
+            </div>
+            
+            <div class="toolset-wrapper">
+                <div class="toolset-title">Categories</div>
+                <hr />
+                <div class="tool-wrapper">
+                    <div class="tool-title">Create</div>
+                    <form class="tool-form" action="/bookmarks/create-category" method="post">
+                        {% csrf_token %}
+                        <div class="form-line"><label class="form-label">Name:</label><input type="text" name="name" /><br /></div>
+                        <div class="form-line"><input type="submit" value="Create" /></div>
+                    </form>
+                </div>
+
+                <div class="tool-wrapper">
+                    <div class="tool-title">Categories</div>
+                    <ul class="bookmark-wrapper">
+                        {% for category in categories %}
+                        <li><a class="bookmark" href="/bookmarks/rename-category/{{ category.id }}">{{ category.name }}({{ category.bookmark_set.count }})</a><a class="delete-bookmark" href="/bookmarks/delete-category/{{ category.id }}" title="delete">x</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            
+            </div>
+            
+        </div>
+        
+        
+        <div class="activities">
+            <div class="meta-title">Meta</div>
+            <hr />
+            <a href="/ctrlhub/main">Control Hub</a><br />
+            <a href="/ctrlhub/logout">Logout</a>
+        </div>    
+    </div>
+
+</div>
+</body>

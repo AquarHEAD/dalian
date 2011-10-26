@@ -11,6 +11,8 @@ def home(request):
     else:
         q = "Dantalian no Shoka"
     
+    most_recent = []
+    
     categories = Category.objects.all()
     for category in categories:
         category.bookmarks = []
