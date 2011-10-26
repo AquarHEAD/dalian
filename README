@@ -1,0 +1,20 @@
+"Dalian" is a name from a recent anime "Dantalian no Shoka"(「ダンタリアンの書架」)
+
+This projects is my personal new homepage/startpage intend to replace those
+about:blank or google.com in my browsers.
+
+Publicly featuring bookmarks for quick reference and access on others computers
+and activities which combines rss/oauth news updates from my frequent visited
+social-alike websites.
+
+Privately (after logged in) featuring bookmarks /w readlist-style feature and
+a place to quickly collect piece of ideas (in text format), can also be used
+as todo-list.
+
+-LOCAL SETUP & TEST-
+
+>copy settings.py.example -> settings.py
+>set the ADMIN_PASSWORD, DATABASES & TEMPLATE_DIRS
+>create the database dir (if it doesn't exist and you decide to use sqlite3)
+>run "python manage.py syncdb" & "python manage.py runserver"
+>open http://127.0.0.1 in your browser
