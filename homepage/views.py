@@ -1,8 +1,10 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from random import choice
-from dalian.bookmarks.models import Category
+from dalian.categories.models import Category
 from dalian.quotes.models import Quote
+from dalian.settings import LOGIN_KEY, GMAIL_ENABLE, GMAIL_USERNAME, GMAIL_PASSWORD, GMAIL_PROTO, GMAIL_PATH
+import feedparser
 
 def home(request):
     quotes = Quote.objects.all()
@@ -20,16 +22,11 @@ def home(request):
             if bookmark.archive == False:
                 category.bookmarks.append(bookmark)
     
+    if GMAIL_ENABLE:
+        newmails = int(feedparser.parse(GMAIL_PROTO+GMAIL_USERNAME+":"+GMAIL_PASSWORD+"@"+GMAIL_PATH)["feed"]["fullcount"])    
+    
     sudo = request.session.get('sudo', default = None)
-    if sudo == 'dalian':
-        return private(request, q, categories)
+    if sudo == LOGIN_KEY:
+        return render_to_response('homepage/private.html', {'quote': q, 'categories': categories, 'newmails': newmails}, context_instance=RequestContext(request))
     else:
-        return public(request, q, categories)
-
-def public(request, q, categories):
-    
-    return render_to_response('homepage/public.html', {'quote': q, 'categories': categories}, context_instance=RequestContext(request))
-    
-def private(request, q, categories):
-    
-    return render_to_response('homepage/private.html', {'quote': q, 'categories': categories}, context_instance=RequestContext(request))
+        return render_to_response('homepage/public.html', {'quote': q, 'categories': categories}, context_instance=RequestContext(request))

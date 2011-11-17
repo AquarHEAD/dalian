@@ -70,7 +70,7 @@ body {
 .form-label{
 	display: inline-block;
 	margin-right: 10px;
-	width: 150px;
+	width: 75px;
 }
 
 .form-input{
@@ -94,46 +94,6 @@ body {
 	text-decoration: none;
 }
 
-.delete-bookmark:link, .delete-bookmark:visited{
-	margin-left: 4px;
-	font-size: 12px;
-	color: #939393;
-	text-decoration: none;
-}
-
-.delete-bookmark:hover{
-	background-color: #dfffdb;
-	color: #ff0b05;
-}
-
-.category-title{
-	margin-bottom: 0px;
-	margin-top: 10px;
-}
-
-ul.bookmark-wrapper {
-    margin: 0px;
-    padding-left: 0px;
-}
-
-.bookmark-wrapper li{
-    margin-top: 8px;
-    margin-left: 5px;
-    width: 200px;
-    display: inline-block;
-	list-style-type: none;
-}
-
-.bookmark:link, .bookmark:visited{
-	color: #f0bdff;
-	text-decoration: none;
-}
-
-.bookmark:hover{
-	background-color: #42ffe0;
-	text-decoration: none;
-}
-
 </style>
 
 
@@ -154,25 +114,27 @@ ul.bookmark-wrapper {
         <div class="admin-tools">
             
             <div class="toolset-wrapper">
-                <div class="toolset-title">Bookmarks</div>
+                <div class="toolset-title">Edit Bookmark</div>
                 <hr />
                 
-                {% for category in categories %}
-                {% if category.bookmarks %}
-                <div class="category-wrapper">
-                    <div class="category-title">{{ category.name }}</div>
-                    <hr />
-                    <ul class="bookmark-wrapper">
-                        {% for bookmark in category.bookmarks %}
-                        <li><a class="bookmark" href="/bookmarks/edit/{{ bookmark.id }}">{{ bookmark.name }}({{ bookmark.visited }})</a><a class="delete-bookmark" href="/bookmarks/remove/{{ bookmark.id }}" title="delete">x</a></li>
-                        {% endfor %}
-                    </ul>
+                <div class="tool-wrapper">
+                    <div class="tool-title"></div>
+                    <form class="tool-form" action="/bookmarks/edit/{{ bookmark.id }}/" method="post">
+                        {% csrf_token %}
+                        <div class="form-line"><label class="form-label">Name:</label><input class="form-input" type="text" name="name" value="{{ bookmark.name }}"/><br /></div>
+                        <div class="form-line"><label class="form-label">URL:</label><input class="form-input" type="url" name="url" value="{{ bookmark.url }}"/><br /></div>
+                        <div class="form-line"><label class="form-label">Category:</label><select class="form-input" name="category" ></div>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category.id == bookmark.category.id %}selected="selected"{% endif %}>{{ category.name }}</option>
+                            {% endfor %}
+                        </select><br /></div>
+                        <div class="form-line"><label class="form-label">Archive?</label><input class="form-input" type="checkbox" name="archive" {% if bookmark.archive %}checked="checked"{% endif %}/><br /></div>
+                        <div class="form-line"><input type="submit" value="Update" /></div>
+                    </form>
                 </div>
-                {% endif %}
-                {% endfor %}
-                                                
+                
             </div>
-                        
+            
         </div>
         
         
@@ -181,7 +143,8 @@ ul.bookmark-wrapper {
             <hr />
             <a href="/ctrlhub/main">Control Hub</a><br />
             <a href="/ctrlhub/logout">Logout</a>
-        </div>    
+        </div>
+    
     </div>
 
 </div>

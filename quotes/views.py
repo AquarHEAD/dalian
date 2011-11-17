@@ -7,6 +7,6 @@ def add(request):
     if sudo == 'dalian':
         if request.method == 'POST':
             new_quote = Quote.objects.create(content = request.POST['content'])
-        return redirect('/ctrlhub')
+        return redirect('/ctrlhub/main')
     else:
-        return redirect('/login')
+        return redirect('/ctrlhub/login')

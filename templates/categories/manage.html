@@ -152,27 +152,22 @@ ul.bookmark-wrapper {
     <div class="content">
     
         <div class="admin-tools">
-            
+                        
             <div class="toolset-wrapper">
-                <div class="toolset-title">Bookmarks</div>
+                <div class="toolset-title">Categories</div>
                 <hr />
-                
-                {% for category in categories %}
-                {% if category.bookmarks %}
-                <div class="category-wrapper">
-                    <div class="category-title">{{ category.name }}</div>
-                    <hr />
+
+                <div class="tool-wrapper">
+                    <div class="tool-title">Click to rename</div>
                     <ul class="bookmark-wrapper">
-                        {% for bookmark in category.bookmarks %}
-                        <li><a class="bookmark" href="/bookmarks/edit/{{ bookmark.id }}">{{ bookmark.name }}({{ bookmark.visited }})</a><a class="delete-bookmark" href="/bookmarks/remove/{{ bookmark.id }}" title="delete">x</a></li>
+                        {% for category in categories %}
+                        <li><a class="bookmark" href="/categories/rename/{{ category.id }}">{{ category.name }}({{ category.bookmark_set.count }})</a><a class="delete-bookmark" href="/categories/remove/{{ category.id }}" title="delete">x</a></li>
                         {% endfor %}
                     </ul>
                 </div>
-                {% endif %}
-                {% endfor %}
-                                                
+            
             </div>
-                        
+            
         </div>
         
         

@@ -70,7 +70,7 @@ body {
 .form-label{
 	display: inline-block;
 	margin-right: 10px;
-	width: 150px;
+	width: 75px;
 }
 
 .form-input{
@@ -113,11 +113,13 @@ body {
     
         <div class="admin-tools">
             <div class="toolset-wrapper">
-                <div class="toolset-title">Quotes</div>
+                <div class="toolset-title">Notes<a href="/notes/manage">manage</a></div>
                 <hr />
-                <form class="tool-form" action="/quotes/add" method="post">
+                <form class="tool-form" action="/notes/add" method="post">
                     {% csrf_token %}
-                    <textarea rows="5" cols="60" name="content"></textarea>
+                    <label class="form-label">Name:</label><input class="form-input" type="text" name="name" /><br />
+                    <label class="form-label"></label><textarea rows="5" cols="60" name="content"></textarea><br />
+                    <label class="form-label">Language:</label><input class="form-input" type="text" name="lang" />
                     <input type="submit" value="Add Quote" />
                 </form>
             </div>
@@ -126,19 +128,10 @@ body {
                 <div class="toolset-title">Bookmarks<a href="/bookmarks/manage">manage</a></div>
                 <hr />
                 
-                <div class="tool-wrapper">
-                    <div class="tool-title">Create Category</div>
-                    <form class="tool-form" action="/bookmarks/create-category" method="post">
-                        {% csrf_token %}
-                        <div class="form-line"><label class="form-label">Name:</label><input type="text" name="name" /><br /></div>
-                        <div class="form-line"><input type="submit" value="Create" /></div>
-                    </form>
-                </div>
-                
                 {% if categories %}
                 <div class="tool-wrapper">
                     <div class="tool-title">Add Bookmark</div>
-                    <form class="tool-form" action="/bookmarks/add-bookmark" method="post">
+                    <form class="tool-form" action="/bookmarks/add" method="post">
                         {% csrf_token %}
                         <div class="form-line"><label class="form-label">Name:</label><input class="form-input" type="text" name="name" /><br /></div>
                         <div class="form-line"><label class="form-label">URL:</label><input class="form-input" type="url" name="url" /><br /></div>
@@ -147,7 +140,7 @@ body {
                             <option value="{{ category.id }}">{{ category.name }}</option>
                             {% endfor %}
                         </select><br /></div>
-                        <div class="form-line"><label class="form-label">Archive it?</label><input class="form-input" type="checkbox" name="archive"/><br /></div>
+                        <div class="form-line"><label class="form-label">Archive?</label><input class="form-input" type="checkbox" name="archive"/><br /></div>
                         <div class="form-line"><input type="submit" value="Add" /></div>
                     </form>
                 </div>
@@ -160,11 +153,35 @@ body {
                         <div class="form-line"><label class="form-label">Name:</label><input class="form-input" type="text" name="name" /><br /></div>
                         <div class="form-line"><label class="form-label">URL:</label><input class="form-input" type="url" name="url" /><br /></div>
                         <div class="form-line"><label class="form-label">Category:</label><input class="form-input" type="text" name="category" /><br /></div>
-                        <div class="form-line"><label class="form-label">Archive it?</label><input class="form-input" type="checkbox" name="archive"/><br /></div>
+                        <div class="form-line"><label class="form-label">Archive?</label><input class="form-input" type="checkbox" name="archive"/><br /></div>
                         <div class="form-line"><input type="submit" value="Add" /></div>
                     </form>
                 </div>
                 
+            </div>
+            
+            <div class="toolset-wrapper">
+                <div class="toolset-title">Categories<a href="/categories/manage">manage</a></div>
+                <hr />
+                
+                <div class="tool-wrapper">
+                    <div class="tool-title">Create</div>
+                    <form class="tool-form" action="/categoriess/add" method="post">
+                        {% csrf_token %}
+                        <div class="form-line"><label class="form-label">Name:</label><input type="text" name="name" /><br /></div>
+                        <div class="form-line"><input type="submit" value="Create" /></div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="toolset-wrapper">
+                <div class="toolset-title">Quotes</div>
+                <hr />
+                <form class="tool-form" action="/quotes/add" method="post">
+                    {% csrf_token %}
+                    <textarea rows="5" cols="60" name="content"></textarea>
+                    <input type="submit" value="Add Quote" />
+                </form>
             </div>
             
         </div>

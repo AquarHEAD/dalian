@@ -13,9 +13,19 @@ body {
 	width: 960px;
 }
 
-.quote {
+.admin-title {
 	text-align: center;
 	clear: both;
+}
+
+.content {
+	margin-top: 10px;
+}
+
+.admin-tools{
+	float: left;
+	margin-left: 20px;
+	width: 650px;
 }
 
 .content {
@@ -39,6 +49,17 @@ body {
 	float: right;
 }
 
+.admin-title a:link, .admin-title a:visited{
+	color: black;
+	text-decoration: none;
+}
+
+.admin-title a:hover{
+	background-color: #12ff8b;
+	text-decoration: none;
+}
+
+
 </style>
 
 
@@ -48,8 +69,8 @@ body {
 
 <body>
 <div class="container">
-    <div class="quote">
-        <p>「ダンタリアンの書架」の管理者</p>
+    <div class="admin-title">
+        <p><a href="/">「ダンタリアンの書架」</a>の管理者</p>
         <hr />
     </div>
     
@@ -59,7 +80,7 @@ body {
         <div class="admin-tools">
             <div class="toolset-title">我は問う、汝は人なりや？</div>
             <hr />
-            <form action="/login" method="post">
+            <form action="/ctrlhub/login" method="post">
                 {% csrf_token %}
                 <input type="password" name="password">
                 <input type="submit" value="Login" />
