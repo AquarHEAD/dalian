@@ -63,6 +63,6 @@ def edit(request, bookmark_id):
 # removing the bookmark
 @login_check(LOGIN_KEY)
 def remove(request, bookmark_id):
-    bookmark = get_object_or_404(Category, pk=bookmark_id)
+    bookmark = get_object_or_404(Bookmark, pk=bookmark_id)
     bookmark.delete()
     return redirect('/bookmarks/manage')

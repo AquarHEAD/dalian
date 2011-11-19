@@ -28,10 +28,21 @@ ul.bookmark-wrapper {
 	background-color: #42ffe0;
 	text-decoration: none;
 }
+
+.meta-link:link, .meta-link:visited{
+	color: #f0bdff;
+	text-decoration: none;
+}
+
+.meta-link:hover{
+	background-color: #42ffe0;
+	text-decoration: none;
+}
 {% endblock %}
 
 {% block header%}
 <p>{{quote|escape|linebreaks}}</p>
+<hr />
 {% endblock %}
 
 {% block main %}
@@ -53,5 +64,5 @@ ul.bookmark-wrapper {
 {% block utils %}
 <div class="meta-title">Meta</div>
 <hr />
-<a href="/ctrlhub/login">Login</a>
+<a class="meta-link" href="/ctrlhub/login">Login</a>
 {% endblock %}

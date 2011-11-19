@@ -28,10 +28,36 @@ ul.bookmark-wrapper {
 	background-color: #42ffe0;
 	text-decoration: none;
 }
+
+.meta-link:link, .meta-link:visited{
+	color: #f0bdff;
+	text-decoration: none;
+}
+
+.meta-link:hover{
+	background-color: #42ffe0;
+	text-decoration: none;
+}
+
+.meta-logout:link, .meta-logout:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.meta-logout:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
 {% endblock %}
 
 {% block header%}
 <p>{{quote|escape|linebreaks}}</p>
+<hr />
+tweets here?
+<hr />
 {% endblock %}
 
 {% block main %}
@@ -51,10 +77,8 @@ ul.bookmark-wrapper {
 {% endblock %}
 
 {% block utils %}
-<div class="meta-title">Meta</div>
+<a class="meta-link" href="/ctrlhub/main">Meta</a><a class="meta-logout" href="/ctrlhub/logout">Logout</a>
 <hr />
-{% if newmails > 0 %}<a href="https://mail.google.com/mail/#inbox" target="_blank">GMail :: {{ newmails }}</a><br />{% endif %}
-<a href="/ctrlhub/main">Control Hub</a><br />
-<a href="/notes/manage"></a><br />
-<a href="/ctrlhub/logout">Logout</a>
+<a class="meta-link" href="https://mail.google.com/mail/#inbox" target="_blank">{% if newmails > 0 %}GMail :: {{ newmails }}{% else %}Gmail{% endif %}</a><br />
+<a class="meta-link" href="/notes/manage">Notes</a><br />
 {% endblock %}

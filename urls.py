@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     url(r'^bookmarks/', include('bookmarks.urls')),
     url(r'^categories/', include('categories.urls')),
     url(r'^notes/', include('notes.urls')),
+    url(r'^tweets/',include('tweets.urls')),
     url(r'^quotes/add$', 'dalian.quotes.views.add'),
 )
