@@ -1,0 +1,69 @@
+{% extends "control_base.html" %}
+
+{% block styles %}
+.delete-note:link, .delete-note:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.delete-note:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
+ul.notes-wrapper {
+    margin: 0px;
+    padding-left: 0px;
+}
+
+.notes-wrapper li{
+    margin-top: 8px;
+    display: block;
+	list-style-type: none;
+}
+
+.note:link, .note:visited{
+	color: #f0bdff;
+	text-decoration: none;
+}
+
+.note:hover{
+	background-color: #42ffe0;
+	text-decoration: none;
+}
+
+{% endblock %}
+
+{% block title %}Notes{% endblock %}
+
+{% block tools %}
+<div class="toolset-wrapper">
+    <div class="toolset-title">New Note</div>
+    <hr />
+    <form class="tool-form" action="/notes/add" method="post">
+        {% csrf_token %}
+        <div class="form-line"><label class="form-label">Name:</label><input class="form-input" type="text" name="name" /><br /></div>
+        <div class="form-line"><label class="form-label"></label><textarea rows="5" cols="60" name="content"></textarea><br /></div>
+        <div class="form-line"><label class="form-label">Language:</label><input class="form-input" type="text" name="lang" /></div>
+        <div class="form-line"><label class="form-label">Password?</label><input class="form-input" type="password" name="password" /><br /></div>
+        <div class="form-line"><label class="form-label">Private?</label><input class="form-input" type="checkbox" name="private"/><br /></div>
+        <div class="form-line"><input type="submit" value="Save" /></div>
+    </form>
+</div>
+{% endblock %}
+
+{% block widgets %}
+<div class="widget-wrapper">
+    {% if notes %}
+    <div class="widget-title">Notes</div>
+    <hr />
+        <ul class="notes-wrapper">
+        {% for note in notes %}
+            <li><a class="note" href="/notes/edit/{{note.id}}">{{note.name}}</a><a class="delete-note" href="/notes/view/{{note.id}}" title="view">+</a><a class="delete-note" href="/notes/remove/{{note.id}}" title="delete">x</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

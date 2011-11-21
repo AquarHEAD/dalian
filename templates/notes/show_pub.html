@@ -1,0 +1,66 @@
+{% extends "common_base.html" %}
+
+{% block styles %}
+.delete-note:link, .delete-note:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.delete-note:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
+ul.notes-wrapper {
+    margin: 0px;
+    padding-left: 0px;
+}
+
+.notes-wrapper li{
+    margin-top: 8px;
+    display: block;
+	list-style-type: none;
+}
+
+.note:link, .note:visited{
+	color: #f0bdff;
+	text-decoration: none;
+}
+
+.note:hover{
+	background-color: #42ffe0;
+	text-decoration: none;
+}
+
+{{ styles }}
+
+{% endblock %}
+
+{% block header %}{{viewing_note.name}}{% endblock %}
+
+{% block tools %}
+<div class="toolset-wrapper">
+    <div class="toolset-title">{{viewing_note.name}}</div>
+    <hr />
+    {% autoescape off %}
+        {{viewing_note.result}}
+    {% endautoescape %}
+
+</div>
+{% endblock %}
+
+{% block widgets %}
+<div class="widget-wrapper">
+    {% if notes %}
+    <div class="widget-title">Notes</div>
+    <hr />
+        <ul class="notes-wrapper">
+        {% for note in notes %}
+            <li><a class="note" href="/notes/edit/{{note.id}}">{{note.name}}</a><a class="delete-note" href="/notes/remove/{{note.id}}" title="delete">x</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

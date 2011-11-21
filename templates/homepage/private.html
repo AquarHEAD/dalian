@@ -4,6 +4,8 @@
 .category-title{
 	margin-bottom: 0px;
 	margin-top: 10px;
+	position: relative;
+	left: -10px;
 }
 
 ul.bookmark-wrapper {
@@ -12,7 +14,7 @@ ul.bookmark-wrapper {
 }
 
 .bookmark-wrapper li{
-    margin-top: 8px;
+    margin-bottom: 8px;
     margin-left: 5px;
     width: 200px;
     display: inline-block;
@@ -51,20 +53,36 @@ ul.bookmark-wrapper {
 	color: #ff0b05;
 }
 
+.fold-button{
+	padding: 0px;
+	margin: 0px;
+	color: #d6d6d6;
+	text-decoration: none;
+	position:relative;
+	left:-5px;
+}
+
+{% endblock %}
+
+{% block js %}
+$(function() {
+    $(".fold-button").click(function() {
+	$(this).parent().parent().find("ul").slideToggle();
+    });
+});
 {% endblock %}
 
 {% block header%}
 <p>{{quote|escape|linebreaks}}</p>
 <hr />
 tweets here?
-<hr />
 {% endblock %}
 
 {% block main %}
     {% for category in categories %}
 	{% if category.bookmarks %}
 	<div class="category-wrapper">
-	    <div class="category-title">{{ category.name }}</div>
+	    <div class="category-title"><a class="fold-button" href="#">+</a>{{ category.name }}</div>
 	    <hr />
 	    <ul class="bookmark-wrapper">
 		{% for bookmark in category.bookmarks %}
@@ -80,5 +98,5 @@ tweets here?
 <a class="meta-link" href="/ctrlhub/main">Meta</a><a class="meta-logout" href="/ctrlhub/logout">Logout</a>
 <hr />
 <a class="meta-link" href="https://mail.google.com/mail/#inbox" target="_blank">{% if newmails > 0 %}GMail :: {{ newmails }}{% else %}Gmail{% endif %}</a><br />
-<a class="meta-link" href="/notes/manage">Notes</a><br />
+<a class="meta-link" href="/notes/home">Notes</a><br />
 {% endblock %}

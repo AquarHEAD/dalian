@@ -1,101 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<head>
-<style type="text/css">
+{% extends "control_base.html" %}
 
-body {
-    margin: 0px;
-    padding: 0px;
-}
-
-.container {
-	margin: 20px;
-	font-family: monospace, sans-serif;
-	width: 960px;
-}
-
-.admin-title {
-	text-align: center;
-	clear: both;
-}
-
-.content {
-	margin-top: 10px;
-}
-
-.admin-tools{
-	float: left;
-	margin-left: 20px;
-	width: 650px;
-}
-
-.content {
-	margin-top: 10px;
-}
-
-.admin-tools{
-	float: left;
-	margin-left: 20px;
-	width: 650px;
-}
-
-.toolset-title{
-	margin-bottom: 0px;
-	margin-top: 10px;
-}
-
-.activities{
-	width: 270px;
-	margin-top: 10px;
-	float: right;
-}
-
-.admin-title a:link, .admin-title a:visited{
-	color: black;
-	text-decoration: none;
-}
-
-.admin-title a:hover{
-	background-color: #12ff8b;
-	text-decoration: none;
-}
-
-
-</style>
-
-
-</head>
-
-
-
-<body>
-<div class="container">
-    <div class="admin-title">
-        <p><a href="/">「ダンタリアンの書架」</a>の管理者</p>
-        <hr />
-    </div>
+{% block title %}Login{% endblock %}
     
-    
-    <div class="content">
-    
-        <div class="admin-tools">
-            <div class="toolset-title">我は問う、汝は人なりや？</div>
+{% block tools %} 
+        <div class="toolset-title">我は問う、汝は人なりや？</div>
             <hr />
             <form action="/ctrlhub/login" method="post">
                 {% csrf_token %}
-                <input type="password" name="password">
-                <input type="submit" value="Login" />
+                <div class="form-line"><input type="password" name="password"></div>
+                <div class="form-line"><input type="submit" value="Login" /></div>
             </form>
-
-            
         </div>
+{% endblock %}
         
-        
-        <div class="activities">
-            <div class="rss-head">Activities</div>
-            <hr />
-        </div>
-    
-    </div>
-
-</div>
-</body>
+{% block widgets %}
+{% endblock %}

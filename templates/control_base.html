@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<head>
+<style type="text/css">
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#container {
+	margin: 20px;
+	font-family: monospace, sans-serif;
+	width: 960px;
+}
+
+#header {
+	text-align: center;
+	clear: both;
+}
+
+#content {
+	margin-top: 10px;
+}
+
+#admin-tools{
+	float: left;
+	margin-left: 20px;
+	width: 650px;
+}
+
+.toolset-wrapper{
+	margin-bottom: 20px;
+}
+
+.toolset-title{
+	font-size: 18px;
+	margin: 0px;
+}
+
+.tool-wrapper{
+	margin-bottom: 10px;
+}
+
+.tool-title{
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+
+.toolset-title a:link, .toolset-title a:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.toolset-title a:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
+.tool-form{
+	font-size: 13px;
+	margin-left: 9px;
+}
+
+.form-line{
+	margin-bottom: 2px;
+}
+
+.form-label{
+	display: inline-block;
+	margin-right: 10px;
+	width: 75px;
+}
+
+.form-input{
+	margin: 0px;
+	display: inline-block;
+}
+
+#widgets{
+	margin: 0px;
+	width: 270px;
+	float: right;
+}
+
+.admin-title a:link, .admin-title a:visited{
+	color: black;
+	text-decoration: none;
+}
+
+.admin-title a:hover{
+	background-color: #12ff8b;
+	text-decoration: none;
+}
+
+.widget-wrapper {
+    margin-bottom: 5px;
+}
+
+#footer{
+	clear: both;
+	width: 960px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	text-align: right;
+	position: fixed;
+	bottom: 0;
+}
+
+{% block styles %}{% endblock %}
+
+</style>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script type="text/javascript">
+{% block js %}{% endblock %}
+</script>
+
+</head>
+
+
+
+<body>
+<div id="container">
+    <div id="header">
+        <p><a href="/">「ダンタリアンの書架」</a>の {% block title %}{% endblock %}</p>
+        <hr />
+    </div>
+    
+    <div id="content">
+    
+        <div id="admin-tools">
+            {% block tools %}{% endblock %}
+        </div>
+        
+        <div id="widgets">
+            {% block widgets %}{% endblock %}
+            <div class="widget-wrapper">
+                <div class="widget-title">Meta</div>
+                <hr />
+                <a href="/ctrlhub/main">Control Hub</a><br />
+                <a href="/ctrlhub/logout">Logout</a>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div id="footer">
+	<hr />
+    	Version 0.6 :: {% now "jS F Y H:i" %}
+        {% block footer %}{% endblock %}
+    </div>
+
+</div>
+</body>
