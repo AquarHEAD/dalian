@@ -6,10 +6,10 @@
 <div class="toolset-wrapper">
     <div class="toolset-title">New Note</div>
     <hr />
-    <form class="tool-form" action="/notes/edit" method="post">
+    <form class="tool-form" action="/notes/edit/{{note.id}}/" method="post">
         {% csrf_token %}
         <div class="form-line"><label class="form-label">Name:</label><input class="form-input" type="text" name="name" value="{{note.name}}"/><br /></div>
-        <div class="form-line"><label class="form-label"></label><textarea rows="5" cols="60" name="content" value="{{note.content}}"></textarea><br /></div>
+        <div class="form-line"><label class="form-label"></label><textarea rows="20" cols="60" name="content" >{{note.content}}</textarea><br /></div>
         <div class="form-line"><label class="form-label">Language:</label><input class="form-input" type="text" name="lang" value="{{note.lang}}"/></div>
         <div class="form-line"><label class="form-label">Password?</label><input class="form-input" type="password" name="password" /><br /></div>
         <div class="form-line"><label class="form-label">Private?</label><input class="form-input" type="checkbox" name="private" value="{{note.private}}"/><br /></div>

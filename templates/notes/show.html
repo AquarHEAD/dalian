@@ -61,7 +61,7 @@ ul.notes-wrapper {
     <hr />
         <ul class="notes-wrapper">
         {% for note in notes %}
-            <li><a class="note" href="/notes/edit/{{note.id}}">{{note.name}}</a><a class="delete-note" href="/notes/remove/{{note.id}}" title="delete">x</a></li>
+            <li><a class="note" href="/notes/view/{{note.id}}">{{note.name}}</a><a class="delete-note" href="/notes/remove/{{note.id}}" title="delete">x</a></li>
         {% endfor %}
         </ul>
     {% endif %}

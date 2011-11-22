@@ -67,6 +67,7 @@ ul.bookmark-wrapper {
 {% block js %}
 $(function() {
     $(".fold-button").click(function() {
+    $(this).html() == '+' ? $(this).html('-') : $(this).html('+');
 	$(this).parent().parent().find("ul").slideToggle();
     });
 });
@@ -82,7 +83,7 @@ tweets here?
     {% for category in categories %}
 	{% if category.bookmarks %}
 	<div class="category-wrapper">
-	    <div class="category-title"><a class="fold-button" href="#">+</a>{{ category.name }}</div>
+	    <div class="category-title"><a class="fold-button" href="#">-</a>{{ category.name }}</div>
 	    <hr />
 	    <ul class="bookmark-wrapper">
 		{% for bookmark in category.bookmarks %}
