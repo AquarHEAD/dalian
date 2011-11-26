@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
-urlpatterns = patterns('notes.views',
+urlpatterns = patterns('dalian.notes.views',
     url(r'^home$', 'home'),
     url(r'^add$', 'add'),
     url(r'^edit/(?P<note_id>\d+)/$', 'edit'),

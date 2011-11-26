@@ -18,3 +18,13 @@ as todo-list.
 >create the database dir (if it doesn't exist and you decide to use sqlite3)
 >run "python manage.py syncdb" & "python manage.py runserver"
 >open http://127.0.0.1 in your browser
+
+-Deploy on DotCloud-
+
+>signup dotcloud and install the CLI
+>dotcloud create dalian
+>clone this git repo and cd into it
+>make
+>dotcloud alias add dalian.www xxx.example.com
+>set your browser's default homepage and
+>enjoy :D
