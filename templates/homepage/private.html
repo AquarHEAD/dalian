@@ -62,10 +62,36 @@ ul.bookmark-wrapper {
 	left:-5px;
 }
 
+.archive-ctrl:link, .archive-ctrl:visited{
+	margin-left: 4px;
+	font-size: 12px;
+	color: #939393;
+	text-decoration: none;
+}
+
+.archive-ctrl:hover{
+	background-color: #dfffdb;
+	color: #ff0b05;
+}
+
+
 {% endblock %}
 
 {% block js %}
 $(function() {
+    $(".archived").hide();
+    $(".archive-ctrl").click(function() {
+        if ($(this).html() == 'show archived'){
+            $(this).html('hide archived');
+            $(this).parent().parent().find(".archived").show();
+        }
+        else{
+            $(this).html('show archived');
+            $(this).parent().parent().find(".archived").hide();
+        }
+    });
+    $.get('/gc', function(response) { $(".gmail_count").html(response);});
+    $(".gc_loading").ajaxStop(function() { $(this).hide(); });
     $(".fold-button").click(function() {
     $(this).html() == '+' ? $(this).html('-') : $(this).html('+');
 	$(this).parent().parent().find("ul").slideToggle();
@@ -83,11 +109,12 @@ tweets here?
     {% for category in categories %}
 	{% if category.bookmarks %}
 	<div class="category-wrapper">
-	    <div class="category-title"><a class="fold-button" href="#">-</a>{{ category.name }}</div>
+	    <div class="category-title"><a class="fold-button" href="#">-</a>{{ category.name }}{% if category.has_archived %}<a class="archive-ctrl" href="#">show archived</a>{% endif %}</div>
 	    <hr />
 	    <ul class="bookmark-wrapper">
 		{% for bookmark in category.bookmarks %}
-		<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
+		{% if not bookmark.archive %}<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
+		{% else %}<li><a class="bookmark archived" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>{% endif %}
 		{% endfor %}
 	    </ul>
 	</div>
@@ -98,6 +125,6 @@ tweets here?
 {% block utils %}
 <a class="meta-link" href="/ctrlhub/main">Meta</a><a class="meta-logout" href="/ctrlhub/logout">Logout</a>
 <hr />
-<a class="meta-link" href="https://mail.google.com/mail/#inbox" target="_blank">{% if newmails > 0 %}GMail :: {{ newmails }}{% else %}Gmail{% endif %}</a><br />
+{% if gmail_enable %}<a class="meta-link" href="https://mail.google.com/mail/#inbox" target="_blank">Gmail :: <span class="gc_loading">...</span><span class="gmail_count"></span></a><br />{% endif %}
 <a class="meta-link" href="/notes/home">Notes</a><br />
 {% endblock %}

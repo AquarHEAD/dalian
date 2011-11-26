@@ -46,13 +46,13 @@ ul.bookmark-wrapper {
 
 {% block main %}
     {% for category in categories %}
-	{% if category.bookmarks %}
+	{% if category.count != 0 %}
 	<div class="category-wrapper">
 	    <div class="category-title">{{ category.name }}</div>
 	    <hr />
 	    <ul class="bookmark-wrapper">
 		{% for bookmark in category.bookmarks %}
-		<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
+		{% if not bookmark.archive %}<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>{% endif %}
 		{% endfor %}
 	    </ul>
 	</div>
