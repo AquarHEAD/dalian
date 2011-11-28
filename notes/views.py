@@ -1,11 +1,13 @@
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
+from django.utils.encoding import smart_str, smart_unicode
 from dalian.notes.models import Note
 from dalian.utils.decorators import login_check
 from dalian.settings import LOGIN_KEY
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
+import misaka
 
 @login_check(LOGIN_KEY)
 def home(request):
@@ -51,14 +53,13 @@ def view(request, note_id):
         note.result = highlight(note.content, lexer, formatter)
     else:
         note.is_code = False
-        note.result = note.content
-    styles = HtmlFormatter().get_style_defs('.note-content')
+        note.result = misaka.html(smart_str(note.content))
     sudo = request.session.get('sudo', default = None)
     if sudo == LOGIN_KEY:
         notes = Note.objects.all()
-        return render_to_response('notes/show.html', {'styles': styles, 'viewing_note': note, 'notes': notes}, context_instance=RequestContext(request))
+        return render_to_response('notes/show.html', {'viewing_note': note, 'notes': notes}, context_instance=RequestContext(request))
     else:
         if show_note.private:
-            return redirect('/')
+            return redirect('/ctrlhub/login')
         else:
             return render_to_response('notes/show_pub.html', {'styles': styles, 'viewing_note': note}, context_instance=RequestContext(request))
