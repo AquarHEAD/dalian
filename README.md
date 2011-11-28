@@ -20,11 +20,19 @@ as todo-list.
 LOCAL SETUP & TEST-
 -----
 
->copy settings.py.example -> settings.py
->set the ADMIN_PASSWORD, DATABASES & TEMPLATE_DIRS
->create the database dir (if it doesn't exist and you decide to use sqlite3)
->run "python manage.py syncdb" & "python manage.py runserver"
->open http://127.0.0.1 in your browser
+1. 	```bash
+	git clone git://github.com/AquarHEAD/dalian.git
+	```
+2. 	```bash
+	cp settings.py.example settings.py
+	```
+3. 	fill the settings
+4. 	create database
+5. 	```bash
+	python manage.py syncdb
+	python manage.py runserver
+	```
+6. 	open http://127.0.0.1 in your browser
 
 Deploy on DotCloud-
 -----
