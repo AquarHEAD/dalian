@@ -31,7 +31,7 @@ LOCAL SETUP & TEST-
 3. 	fill the settings
 4. 	create database
 5. 	```
-	python manage.py syncdb
+	python manage.py syncdb  
 	python manage.py runserver
 	```
 6. 	open http://127.0.0.1
@@ -44,9 +44,9 @@ Deploy on DotCloud-
 	dotcloud create dalian
 	```
 3. 	```
-	git clone git://github.com/AquarHEAD/dalian.git
-	cd dalian
-	cp settings.py.example settings.py.dotcloud
+	git clone git://github.com/AquarHEAD/dalian.git  
+	cd dalian  
+	cp settings.py.example settings.py.dotcloud  
 	```
 4. 	fill the settings
 5 	```
