@@ -9,7 +9,9 @@ she is the manager of the demon's library, and this project intends to be my
 entrance for the great library of Internet, and a replacement to those
 about:blank or google.com in my browsers.
 
-Features:
+Features
+-----
+
 - Bookmarks (with categories and archive function)
 - Random quotes
 - Gmail check
