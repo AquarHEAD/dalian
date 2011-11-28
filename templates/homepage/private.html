@@ -107,12 +107,14 @@ $(function() {
     {% for category in categories %}
 	{% if category.bookmarks %}
 	<div class="category-wrapper">
-	    <div class="category-title"><a class="fold-button" href="#">-</a>{{ category.name }}{% if category.has_archived %}<a class="archive-ctrl" href="#">show archived</a>{% endif %}</div>
+	    <div class="category-title"><a class="fold-button" href="#">-</a>{{ category.name }}{% if category.archived_bookmarks %}<a class="archive-ctrl" href="#">show archived</a>{% endif %}</div>
 	    <hr />
 	    <ul class="bookmark-wrapper">
 		{% for bookmark in category.bookmarks %}
-		{% if not bookmark.archive %}<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
-		{% else %}<li><a class="bookmark archived" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>{% endif %}
+		<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
+		{% endfor %}
+		{% for bookmark in category.archived_bookmarks %}
+		<li><a class="bookmark archived" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
 		{% endfor %}
 	    </ul>
 	</div>

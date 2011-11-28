@@ -24,6 +24,7 @@ as todo-list.
 >signup dotcloud and install the CLI
 >dotcloud create dalian
 >clone this git repo and cd into it
+>copy settings.py.example to settings.py.dotcloud and fill it out
 >make
 >dotcloud alias add dalian.www xxx.example.com
 >set your browser's default homepage and

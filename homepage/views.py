@@ -20,14 +20,12 @@ def home(request):
     categories = Category.objects.all()
     for category in categories:
         category.bookmarks = []
-        category.count = 0
-        category.has_archived = False;
+        category.archived_bookmarks = []
         for bookmark in category.bookmark_set.all():
-            if bookmark.archive == False:
-                category.count += 1
+            if bookmark.archive:
+                category.archived_bookmarks.append(bookmark)
             else:
-                category.has_archived = True
-            category.bookmarks.append(bookmark)
+                category.bookmarks.append(bookmark)
     
     sudo = request.session.get('sudo', default = None)
     if sudo == LOGIN_KEY:
