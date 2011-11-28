@@ -1,4 +1,10 @@
-"Dalian" is the heroine's name from "Dantalian no Shoka"(「ダンタリアンの書架」),
+The Dali'an Project
+=====
+
+Introduction
+-----
+
+"Dali'an" is the heroine's name from "Dantalian no Shoka"(「ダンタリアンの書架」),
 she is the manager of the demon's library, and this project intends to be my
 entrance for the great library of Internet, and a replacement to those
 about:blank or google.com in my browsers.
@@ -11,7 +17,8 @@ Privately (after logged in) featuring bookmarks /w readlist-style feature and
 a place to quickly collect piece of ideas (in text format), can also be used
 as todo-list.
 
--LOCAL SETUP & TEST-
+LOCAL SETUP & TEST-
+-----
 
 >copy settings.py.example -> settings.py
 >set the ADMIN_PASSWORD, DATABASES & TEMPLATE_DIRS
@@ -19,7 +26,8 @@ as todo-list.
 >run "python manage.py syncdb" & "python manage.py runserver"
 >open http://127.0.0.1 in your browser
 
--Deploy on DotCloud-
+Deploy on DotCloud-
+-----
 
 >signup dotcloud and install the CLI
 >dotcloud create dalian
