@@ -19,25 +19,6 @@ ul.bookmark-wrapper {
 	list-style-type: none;
 }
 
-.bookmark:link, .bookmark:visited{
-	color: #f0bdff;
-	text-decoration: none;
-}
-
-.bookmark:hover{
-	background-color: #42ffe0;
-	text-decoration: none;
-}
-
-.meta-link:link, .meta-link:visited{
-	color: #f0bdff;
-	text-decoration: none;
-}
-
-.meta-link:hover{
-	background-color: #42ffe0;
-	text-decoration: none;
-}
 {% endblock %}
 
 {% block header%}
@@ -46,13 +27,13 @@ ul.bookmark-wrapper {
 
 {% block main %}
     {% for category in categories %}
-	{% if category.count != 0 %}
+	{% if category.bookmarks %}
 	<div class="category-wrapper">
 	    <div class="category-title">{{ category.name }}</div>
 	    <hr />
 	    <ul class="bookmark-wrapper">
 		{% for bookmark in category.bookmarks %}
-		{% if not bookmark.archive %}<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>{% endif %}
+		<li><a class="bookmark" href="/bookmarks/goto/{{ bookmark.id }}" title="visited {{ bookmark.visited }} times" target="_blank">{{ bookmark.name }}</a></li>
 		{% endfor %}
 	    </ul>
 	</div>

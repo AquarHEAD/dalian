@@ -6,4 +6,4 @@ class Bookmark(models.Model):
     url = models.URLField(unique = True)
     visited = models.IntegerField(default = 0)
     archive = models.BooleanField(default = False)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, related_name='bookmark_set')

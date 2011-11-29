@@ -49,7 +49,7 @@ Deploy on DotCloud-
 	cp settings.py.example settings.py.dotcloud  
 	```
 4. 	fill the settings
-5 	```
+5. 	```
 	make
 	```
 6. 	you can add your custom domain
